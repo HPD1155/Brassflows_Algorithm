@@ -28,7 +28,7 @@ def plot_images(images, n=1):
 
 # load model
 def load_model(model_path, device):
-    model = ModelV1(in_shape=1, hidden=64, n_classes=7).to(device)
+    model = ModelV1(in_shape=1, hidden=128, n_classes=7).to(device)
     model.load_state_dict(torch.load(model_path, map_location=device))
 
 # predict and plot with true vs predicted labels
@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     # Initialize model
     model = ModelV1(in_shape=train_data[0][0].shape[0],
-                    hidden=64,
+                    hidden=128,
                     n_classes=len(train_data.classes)).to(device)
 
     # Load model weights

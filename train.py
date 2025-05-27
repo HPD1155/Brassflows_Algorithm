@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.optim as optim
 import dataset
-import models.modelv1 as modelv1
+from models.modelv1 import ModelV1 as models
 from torchsummary import summary
 
 print(f'Running on torch version: {torch.__version__}')
@@ -20,8 +20,8 @@ train_loader = torch.utils.data.DataLoader(train_data, batch_size=32, shuffle=Tr
 test_loader = torch.utils.data.DataLoader(test_data, batch_size=32, shuffle=False)
 
 # Initialize model
-model = modelv1.ModelV1(in_shape=train_data[0][0].shape[0],
-                       hidden=64,
+model = models(in_shape=train_data[0][0].shape[0],
+                       hidden=128,
                        n_classes=len(train_data.classes)).to(device)
 
 print(f'Model has {sum(p.numel() for p in model.parameters() if p.requires_grad)} trainable parameters')
@@ -29,7 +29,7 @@ print(model)
 model.to(device)
 
 # optimizer and loss function
-optimizer = optim.Adam(model.parameters(), lr=0.001)
+optimizer = optim.Adam(model.parameters(), lr=0.0001)
 criterion = nn.CrossEntropyLoss()
 criterion.to(device)
 
@@ -62,6 +62,6 @@ def test():
     accuracy = 100 * correct / total
     print(f'Accuracy of the model on the test set: {accuracy:.2f}%')
 
-for epoch in range(1, 30):
+for epoch in range(1, 12):
     train_model(model, epoch)
     test()

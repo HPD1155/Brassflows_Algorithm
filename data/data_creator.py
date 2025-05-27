@@ -34,6 +34,9 @@ def get_current_keys():
             keys.add(k)
     return keys
 
+def screenshot():
+    return PIL.ImageGrab.grab(bbox=(674, 300, 1272, 700))  # Adjusted bbox for your screen
+
 def main():
     create_data_folders(classes)
 
