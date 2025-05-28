@@ -1,13 +1,10 @@
 import PIL.Image
-import PIL.ImagePath
 import torch
-from torch.utils.data import DataLoader
 from torchvision import transforms, datasets
 import matplotlib.pyplot as plt
 import random
 import PIL
 from pathlib import Path
-
 
 
 # transforms for image
@@ -43,7 +40,9 @@ def get_test():
     return datasets.ImageFolder(root='data/test',
                                 transform=data_transforms)
 
+
 if __name__ == "__main__":
+    
     print(f'Running on torch version: {torch.__version__}')
 
     # set device

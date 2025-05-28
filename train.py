@@ -16,8 +16,8 @@ train_data = dataset.get_train()
 test_data = dataset.get_test()
 
 # dataloaders
-train_loader = torch.utils.data.DataLoader(train_data, batch_size=32, shuffle=True)
-test_loader = torch.utils.data.DataLoader(test_data, batch_size=32, shuffle=False)
+train_loader = torch.utils.data.DataLoader(train_data, batch_size=16, shuffle=True)
+test_loader = torch.utils.data.DataLoader(test_data, batch_size=16, shuffle=False)
 
 # Initialize model
 model = models(in_shape=train_data[0][0].shape[0],
@@ -46,7 +46,7 @@ def train_model(model, epoch):
         optimizer.step()
         if batch % 10 == 0:
             print(f'Epoch [{epoch}/30], Batch [{batch+1}/{len(train_loader)}], Loss: {loss.item():.4f}')
-            torch.save(model.state_dict(), 'modelv1.pth')
+            torch.save(model.state_dict(), 'saves/modelv1.pth')
 
 def test():
     model.eval()
@@ -62,6 +62,8 @@ def test():
     accuracy = 100 * correct / total
     print(f'Accuracy of the model on the test set: {accuracy:.2f}%')
 
-for epoch in range(1, 12):
-    train_model(model, epoch)
-    test()
+
+if __name__ == '__main__':
+    for epoch in range(1, 17):
+        train_model(model, epoch)
+        test()

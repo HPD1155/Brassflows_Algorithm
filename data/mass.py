@@ -39,5 +39,14 @@ def create_test():
                     dest_path = os.path.join("data/test", str(j), f"{uuid.uuid4()}.jpg")
                     shutil.copy2(src_path, dest_path)
 
-duplicate_random_files("data/train")
-create_test()
+# Clone 50 of a single image
+def clone_single_image(image_path, target_folder, num_clones=50):
+    os.makedirs(target_folder, exist_ok=True)
+    for _ in range(num_clones):
+        new_name = f"{uuid.uuid4()}.jpg"
+        dest_path = os.path.join(target_folder, new_name)
+        shutil.copy2(image_path, dest_path)
+
+if __name__ == '__main__':
+    clone_single_image('errors/03b8996e-66b6-47f4-8f12-4e67debd2a61.jpg', 'data/train/1', num_clones=50)
+    clone_single_image('errors/03b8996e-66b6-47f4-8f12-4e67debd2a61.jpg', 'data/test/1', num_clones=20)

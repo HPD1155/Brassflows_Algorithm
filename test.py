@@ -44,6 +44,8 @@ def predict_and_plot(model, test_data, n=3, device='gpu'):
     # Plot images with predicted labels
     plot_images(images_tensor.cpu(), n)
     print("Predicted labels:", predicted.cpu().numpy())
+
+
 if __name__ == "__main__":
     print(f'Running on torch version: {torch.__version__}')
 
@@ -61,7 +63,7 @@ if __name__ == "__main__":
                     n_classes=len(train_data.classes)).to(device)
 
     # Load model weights
-    model_path = 'modelv1.pth'
+    model_path = 'saves/modelv1.pth'
     model.load_state_dict(torch.load(model_path, map_location=device))
 
     # Predict and plot images
